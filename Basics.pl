@@ -45,4 +45,11 @@ Max( X,Y,Z):-Z=X,X>Y;Z=Y,Y>X.
  /*---------------------------------------*/
 %rule for odd number
 isodd(X) :- Xmod2><0 .
+/*--------------------------------------*/
+%progra to solve equation √Z=5X2+2Y
+eq(X,Y,Z):-A=5*(X*X),B=2*Y,Z=sqrt(A+B).
+/*-------------------------------------*/
+%rule for Max number using cut operation.
+Max(X,Y,Z) :- X>Y,Z=X,! .
+Max(X,Y,Z) :- Z=Y .
  
