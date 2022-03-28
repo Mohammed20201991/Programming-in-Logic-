@@ -1,0 +1,50 @@
+%	Program 3.3: Addition
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% plus0(X,Y,Z) :- number(X), number(Y), Z is X+Y.
+%%% plus0(X,Y,Z) :- number(X), number(Z), Y is Z-X.
+%%% plus0(X,Y,Z) :- number(Y), number(Z), X is Z-Y.
+plus0(X,Y,Z) :- var(X), var(Y), integer(Z), !, gen(Z,X), Y is Z-X.
+
+gen(Z,X) :- Z>=0, in(0,Z,X).
+gen(Z,X) :- Z<0, in(Z,0,X).
+
+in(I,_,I).
+in(I,J,K) :- I<J, I1 is I+1, in(I1,J,K).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+	times(X,Y,Z) :-
+		X, Y and Z are natural numbers
+		such that Z is the product of X and Y
+*/
+
+	times(0,_,0).
+	times(s(X),Y,Z) :- times(X,Y,XY), plus(XY,Y,Z).
+
+%	Program 3.4: Multiplication as repeated addition
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+	exp(N,X,Y) :-
+			N, X and Y are natural numbers
+			such that Y equals X raised to the power N.
+*/
+
+	exp(s(_),0,0).
+	exp(0,s(_),s(0)).
+	exp(s(N),X,Y) :- exp(N,X,Z), times(Z,X,Y).
+
+%	Program 3.5: Exponentiation as repeated multiplication
+				% add and multiplication in prolog
+go:- write('Enter first number: ') , read(X),nl,
+     write('Enter second number: ') , read(Y),nl,
+    addMult(X,Y).
+   
+
+addMult(X,Y):-
+    S is X+Y,
+    M is X*Y,
+   write('Addition : '),write(S),nl,
+   write('Multiplication: '),write(M),nl.
