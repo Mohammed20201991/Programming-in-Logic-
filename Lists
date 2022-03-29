@@ -1,3 +1,10 @@
 remover( _, [], []).
 remover( R, [R|T], T2) :- remover( R, T, T2).
 remover( R, [H|T], [H|T2]) :- H \= R, remover( R, T, T2).
+
+%Permutation sort
+del(X,[X|List1],List1).
+del(X,[Y|List],[Y|List1]):-del(X,List,List1).
+
+list_permutation([],[]).
+list_permutation(L,[X|P]):- del(X,L,L1),list_permutation(L1,P).
