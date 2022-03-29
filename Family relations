@@ -1,0 +1,1 @@
+wife(X,Y):- parent(X,Z),parent(Y,Z),female(X),female(Y).
