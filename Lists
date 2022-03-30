@@ -8,3 +8,16 @@ del(X,[Y|List],[Y|List1]):-del(X,List,List1).
 
 list_permutation([],[]).
 list_permutation(L,[X|P]):- del(X,L,L1),list_permutation(L1,P).
+
+
+% Prolog predicate check divisibility of numbers in a list
+divisible([], _, []).
+divisible([H|T], X, [H|T1]) :- H mod X =:= 0, divisible(T, X, T1).
+divisible([H|T], X, T1) :- H mod X =\= 0, divisible(T, X, T1).
+
+
+% query
+% divisible([4,6,8,7],2).
+
+% response
+% [4,6,8]
