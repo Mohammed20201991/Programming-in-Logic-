@@ -1,2 +1,4 @@
+parent(X,Y):- father(X,Y),male(X).
+parent(X,Y):- mother(X,Y),female(X).
 wife(X,Y):- parent(X,Z),parent(Y,Z),female(X),female(Y).
 uncle(X,Z):- brother(X,Y),parent(Y,Z).
