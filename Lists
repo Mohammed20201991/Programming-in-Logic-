@@ -87,3 +87,16 @@ yes
      \+smaller([1.5],[1,2]), smaller([1,2],[1.5]).
 yes
 */
+
+/*
+   maxlist(Xs,N) :- N is the maximum of the list of integers Xs.
+*/
+     maxlist([X|Xs],M) :- maxlist(Xs,X,M).
+
+     % maxlist(Xs,M,N) :- N is the maximum of the list of integers [M|Xs]
+     maxlist([X|Xs],Y,M) :- maximum(X,Y,Y1), maxlist(Xs,Y1,M).
+     maxlist([],M,M).
+
+	maximum(X,Y,Y) :- X =< Y.
+	maximum(X,Y,X) :- X > Y.
+%Finding the maximum of a list of integers
