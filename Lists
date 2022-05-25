@@ -109,3 +109,40 @@ yes
 */
      length_check([_X|Xs],N) :- N > 0, N1 is N-1, length_check(Xs,N1).
      length_check([],0).
+
+
+%-------------------------------------------------------------------------
+| Generating a list of integers in a given range                         |
+%-------------------------------------------------------------------------
+/*
+range(M,N,Ns) :- Ns is the list of integers between M and N inclusive.
+*/
+     range(M,N,[M|Ns]) :- M < N, M1 is M+1, range(M1,N,Ns).
+     range(N,N,[N]).
+     
+ | ?- range(2,5,Range).
+        1      1 Call: range(2,5,_1640059) ? 
+        2      2 Call: 2<5 ? 
+        2      2 Exit: 2<5 ? 
+        3      2 Call: _1641095 is 2+1 ? 
+        3      2 Exit: 3 is 2+1 ? 
+        4      2 Call: range(3,5,_1641073) ? 
+        5      3 Call: 3<5 ? 
+        5      3 Exit: 3<5 ? 
+        6      3 Call: _1644351 is 3+1 ? 
+        6      3 Exit: 4 is 3+1 ? 
+        7      3 Call: range(4,5,_1644329) ? 
+        8      4 Call: 4<5 ? 
+        8      4 Exit: 4<5 ? 
+        9      4 Call: _1647597 is 4+1 ? 
+        9      4 Exit: 5 is 4+1 ? 
+       10      4 Call: range(5,5,_1647575) ? 
+       11      5 Call: 5<5 ? 
+       11      5 Fail: 5<5 ? 
+       10      4 Exit: range(5,5,[5]) ? 
+?       7      3 Exit: range(4,5,[4,5]) ? 
+?       4      2 Exit: range(3,5,[3,4,5]) ? 
+?       1      1 Exit: range(2,5,[2,3,4,5]) ? 
+Range = [2,3,4,5] ? 
+yes
+
