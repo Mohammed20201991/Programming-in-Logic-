@@ -21,3 +21,15 @@ divisible([H|T], X, T1) :- H mod X =\= 0, divisible(T, X, T1).
 
 % response
 % [4,6,8]
+
+%---------------------------------------------------------------------------
+%---------------------------------------------------------------------------
+%List is properList(Xs) :-
+%%     Xs is a proper list.
+properList0(Xs) :-
+         var(Xs), !,
+         fail.
+%%! second solution .
+properList([]).
+properList([_|T]) :-
+        properList(T).
