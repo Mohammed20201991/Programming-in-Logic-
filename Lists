@@ -146,3 +146,33 @@ range(M,N,Ns) :- Ns is the list of integers between M and N inclusive.
 Range = [2,3,4,5] ? 
 yes
 
+%---------------------------------------------------
+|max(Ns,M) :- The first maximal element of Ns is M.|
+%---------------------------------------------------
+%% Solution:
+
+max([N|Ns],M) :- max(Ns,N,M).
+
+max([],M,M).
+max([N|Ns],M0,M) :-
+    ( N > M0 -> max(Ns,N,M)
+    ;  max(Ns,M0,M)
+    ).
+ 
+ % Goal 
+ /*
+| ?- \+ max([],_), max([2],M2), max([2,3,1,3.0],M3), max([4.0,3,1,3.0,4],M4p0), max([2,7,3,4,8.0,7.9,-12,1,8],M8p0).
+M2 = 2,
+M3 = 3,
+M4p0 = 4.0,
+M8p0 = 8.0 ? ;
+no
+*/
+
+%--------------------------------------
+min([H|T],Min):- min(T,H,Min).
+
+min([],H,H).
+min([X|Xs],H,Min):-(X<H -> min(Xs,X,Min)
+		   ; min(Xs,H,Min)).
+		   
