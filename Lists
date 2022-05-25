@@ -100,3 +100,12 @@ yes
 	maximum(X,Y,Y) :- X =< Y.
 	maximum(X,Y,X) :- X > Y.
 %Finding the maximum of a list of integers
+%-------------------------------------------------------------------------
+| Checking the length of a list                                          |
+%-------------------------------------------------------------------------
+
+/*
+   length_check(Xs,N) :- Xs is a list of length N.
+*/
+     length_check([_X|Xs],N) :- N > 0, N1 is N-1, length_check(Xs,N1).
+     length_check([],0).
