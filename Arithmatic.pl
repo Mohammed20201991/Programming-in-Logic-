@@ -35,3 +35,26 @@ As = [1,1],  Bs = [1,0],    C = 0,  D = 1 ? ;
 As = [1,1],  Bs = [1,1],    C = 0,  D = 0 ? ;
 no
 */
+
+
+%---------------------------------------------------
+|N is 2^K*M where K and M are nonnegative integers.|
+%---------------------------------------------------
+%% Solution:
+
+'Nis2^K*M'(N,K,M) :- nkm(N,0,K,M).
+
+nkm(N,A,A,N).
+nkm(N,A,K,M) :-
+    N mod 2 =:= 0,
+    N2 is N // 2, A1 is A+1,
+    nkm(N2,A1,K,M). 
+    
+% Goal
+| ?- 'Nis2^K*M'(5,K,M).
+K = 0,    M = 5 ? ;
+no
+| ?- 'Nis2^K*M'(10,K,M).
+K = 0,    M = 10 ? ;
+K = 1,    M = 5 ? ;
+no
