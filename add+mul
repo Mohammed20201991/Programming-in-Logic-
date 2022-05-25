@@ -1,4 +1,4 @@
-%	Program 3.3: Addition
+%	Program : Addition
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% plus0(X,Y,Z) :- number(X), number(Y), Z is X+Y.
 %%% plus0(X,Y,Z) :- number(X), number(Z), Y is Z-X.
@@ -48,3 +48,11 @@ addMult(X,Y):-
     M is X*Y,
    write('Addition : '),write(S),nl,
    write('Multiplication: '),write(M),nl.
+   
+% Multiplication as repeated addition
+times1(_N,0,0).          % case 1)
+times1(N,M1,NM1) :-      % case 2)
+   M1 > 0,
+   M0 is M1-1,
+   times1(N,M0,NM0),
+   NM1 is NM0+N.
