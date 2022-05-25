@@ -33,3 +33,57 @@ properList0(Xs) :-
 properList([]).
 properList([_|T]) :-
         properList(T).
+        
+        
+%-------------------------------------------------
+%-------------------------------------------------
+%% PreCond: Ls and Gs are proper lists of numbers.
+%%
+%% smaller(Ls,Gs) :-
+%%     list Ls is lexicographically smaller than list Gs.
+
+%% Solution:
+smaller([],[]) :- !, fail.
+smaller([], _) :- !.
+smaller([H1|_], [H2|_]) :- H1 < H2, !.
+smaller([H1|T1], [H2|T2]) :-H1=:=H2, smaller(T1,T2). 
+
+% Goal
+/*
+| ?- smaller([],[]).
+no
+| ?- smaller([],[1,2]).
+yes
+| ?- smaller([1],[1,2]).
+yes
+| ?- smaller([1,3],[2,2]).
+yes
+| ?- smaller([2],[1,2]).
+no
+| ?- smaller([5,3,1],[5,3,1,2]).
+yes
+| ?- smaller([5,3,1.0],[5,3,1]).
+no
+| ?- smaller([5,3,1,0],[5,3,1]).
+no
+| ?- smaller([1,0,0,0],[9,9]).
+yes
+| ?- smaller([1.0],[1,2]).
+yes
+| ?- smaller([1],[2,2]).
+yes
+| ?- smaller([2,3,1],[2,3,2]).
+yes
+| ?- smaller([1.5],[1,2]).
+no
+| ?- smaller([1,2],[1.5]).
+yes
+| ?- \+smaller([],[]), smaller([],[1,2]),
+     smaller([1],[1,2]), smaller([1,3],[2,2]),
+     \+smaller([2],[1,2]), smaller([5,3,1],[5,3,1,2]),
+     \+smaller([5,3,1.0],[5,3,1]), \+smaller([5,3,1,0],[5,3,1]),
+     smaller([1,0,0,0],[9,9]), smaller([1.0],[1,2]),
+     smaller([1],[2,2]), smaller([2,3,1],[2,3,2]),
+     \+smaller([1.5],[1,2]), smaller([1,2],[1.5]).
+yes
+*/
