@@ -176,3 +176,47 @@ min([],H,H).
 min([X|Xs],H,Min):-(X<H -> min(Xs,X,Min)
 		   ; min(Xs,H,Min)).
 		   
+%------------------------------------------
+| the sorted difference of two sorted lists|
+%------------------------------------------
+sorted_difference([],_Ys,[]).
+%%%sorted_difference(Xs,[],Xs).
+sorted_difference([_X|_Xs],[],[_X|_Xs]).
+sorted_difference([X|Xs],[Y|Ys],Ds) :-
+    ( X @< Y -> Ds=[X|Zs], sorted_difference(Xs,[Y|Ys],Zs)
+    ; X @> Y -> sorted_difference([X|Xs],Ys,Ds)
+    ; sorted_difference(Xs,Ys,Ds)
+    ).
+    
+  %Goal 
+  /*
+| ?- sorted_difference([1,3,4,a,b,d],[2,3,5,a,c,d,e],Ds).
+Ds = [1,4,b] ? ;
+no
+| ?- sorted_difference([2,3,5,a,c,d,e],[1,3,4,a,b,d],Ds).
+Ds = [2,5,c,e] ? ;
+no
+| ?- sorted_difference([],[1,3,4,a,b,d],Ds).
+Ds = [] ? ;
+no
+| ?- sorted_difference([2,3,5,a,c,d,e],[],Ds).
+Ds = [2,3,5,a,c,d,e] ? ;
+no
+| ?- sorted_difference([],[],Ds).
+Ds = [] ? ;
+no
+| ?- sorted_difference([a,f],[b,f],Ds).
+Ds = [a] ? ;
+no
+| ?- sorted_difference([1,a,f(X)],[1,a,f(Y)],Ds).
+Ds = [f(X)] ? ;
+no
+| ?- sorted_difference([X,2,z],[X,2,z],Ds).
+Ds = [] ? ;
+no
+| ?- sorted_difference([X,2,z],[1,2,z],Ds).
+Ds = [X] ? ;
+no
+*/
+
+
